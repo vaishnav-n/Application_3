@@ -55,16 +55,15 @@ Task("OctoPush")
 	.IsDependentOn("OctoPack")
 	.Does(()=>
 	{	
-       var octoPushSettings = new OctopusPushSettings()
-    {        
-        ReplaceExisting =true
-    };
-    
     var physicalFilePath = System.IO.Path.Combine( Directory(octopkgpath), $"{packageId}.{semVer}.nupkg");
+    
     OctoPush(octopusServerUrl, 
         octopusApiKey, 
+	physicalFilePath,
         octopkgpath, 
-        octoPushSettings);
+         new OctopusPushSettings { 
+                ReplaceExisting = true 
+            });
 	});
 
 Task("OctoCreateRelease")
