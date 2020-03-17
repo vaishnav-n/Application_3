@@ -67,7 +67,7 @@ Task("OctoPush")
         octoPushSettings);
 	});
 
-Task("OctoCreateRelease")
+Task("OctoDeployRelease")
 	.IsDependentOn("OctoPush")
 	.Does(()=>
 	{
@@ -80,9 +80,11 @@ Task("OctoCreateRelease")
 			{
 				{packageId, semVer.ToString()}
 			}
-        };
-
-    OctoCreateRelease("app_2", createReleaseSettings);
+       		 };
+	
+    createReleaseSettings.Channel = "Develop";
+    createReleaseSettings.DeployTo = "Test";
+  
 	});
 
 Task("Default")  
