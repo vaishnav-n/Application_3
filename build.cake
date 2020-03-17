@@ -1,3 +1,4 @@
+#addin "nuget:?package=Cake.ArgumentHelpers"
 #tool "nuget:?package=OctopusTools&Version=6.7.0"
 #addin "Cake.Npm"&version=0.8.0
 #addin nuget:?package=Cake.SemVer
