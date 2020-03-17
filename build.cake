@@ -88,6 +88,6 @@ Task("OctoDeployRelease")
 	});
 
 Task("Default")  
-    .IsDependentOn("OctoCreateRelease"); 
+    .IsDependentOn("OctoDeployRelease"); 
 
 RunTarget(target);
