@@ -16,9 +16,9 @@ var octopkgpath= "D:/OctoPackages/";
 var packageId = "app_2";
 var semVer = CreateSemVer(1,0,0);
 var sourcepath= "Application_3.sln";
-var octopusApiKey=EnvironmentVariable("API-FNLJSUPLFWUEDSKTFIZBHUWPAM");
+var octopusApiKey=ArgumentOrEnvironmentVariable("API-FNLJSUPLFWUEDSKTFIZBHUWPAM");
 
-var octopusServerUrl=EnvironmentVariable("http://localhost:83");
+var octopusServerUrl=ArgumentOrEnvironmentVariable("http://localhost:83");
 
 Task("Restore")
     .Does(()=>
