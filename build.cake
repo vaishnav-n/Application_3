@@ -16,7 +16,7 @@ var octopkgpath= "D:/OctoPackages/";
 var packageId = "app_2";
 var semVer = CreateSemVer(1,0,0);
 var sourcepath= "Application_3.sln";
-var octopusApiKey=ArgumentOrEnvironmentVariable("octopusApiKey","API-FNLJSUPLFWUEDSKTFIZBHUWPAM");
+var octopusApiKey="API-FNLJSUPLFWUEDSKTFIZBHUWPAM";
 
 var octopusServerUrl="http://localhost:83";
 
