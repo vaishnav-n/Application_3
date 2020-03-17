@@ -19,6 +19,10 @@ var sourcepath= "Application_3.sln";
 var octopusApiKey="API-FNLJSUPLFWUEDSKTFIZBHUWPAM";
 var releaseEnvironment = Argument("releaseTo", "Test");
 
+var buildNumber = EnvironmentVariable("BUILD_BUILDNUMBER");
+
+semVer = buildNumber;
+
 var octopusServerUrl="http://localhost:83";
 
 Task("Restore")
