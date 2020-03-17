@@ -84,7 +84,7 @@ Task("OctoDeployRelease")
 			}
        		 };
 	
-    OctoDeployRelease("app_2",createReleaseSettings)
+    OctoDeployRelease("app_2",createReleaseSettings);
   
 	});
 
