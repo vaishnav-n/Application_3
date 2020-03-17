@@ -22,8 +22,8 @@ var octopusServerUrl=EnvironmentVariable("http://localhost:83");
 Task("Restore")
     .Does(()=>
     {
-      NuGetRestore("Application_3.sln")
-      DotNetCoreRestore("Application_3.sln")
+      NuGetRestore("Application_3.sln");
+      DotNetCoreRestore("Application_3.sln");
     });
 
 Task("Build")
