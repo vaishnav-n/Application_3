@@ -67,7 +67,7 @@ Task("OctoPush")
         octoPushSettings);
 	});
 
-Task("OctoDeployRelease")
+Task("OctoCreateRelease")
 	.IsDependentOn("OctoPush")
 	.Does(()=>
 	{
@@ -77,18 +77,17 @@ Task("OctoDeployRelease")
 			ApiKey = octopusApiKey,
 			DeploymentProgress = true,
 			Channel = "Develop",
-			DeployTo = "Test",
 			Packages = new Dictionary<string, string>
 			{
 				{packageId, semVer.ToString()}
 			}
        		 };
 	
-    OctoDeployRelease("app_2",createReleaseSettings);
+    OctoCreateRelease("app_2",createReleaseSettings);
   
 	});
 
 Task("Default")  
-    .IsDependentOn("OctoDeployRelease"); 
+    .IsDependentOn("OctoCreateRelease"); 
 
 RunTarget(target);
