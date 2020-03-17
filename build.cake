@@ -79,6 +79,7 @@ Task("OctoCreateRelease")
 			ApiKey = octopusApiKey,
 			DeploymentProgress = true,
 			Channel = "Develop",
+			ReleaseNumber = semVer.ToString(),
 			Packages = new Dictionary<string, string>
 			{
 				{packageId, semVer.ToString()}
