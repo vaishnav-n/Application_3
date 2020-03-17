@@ -10,13 +10,14 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.IO;
 
-var target= Argument("Argument","Default");
+var target= Argument("Argument","Build");
 var buildoutputpath= "D:/Output_build/" ;
 var octopkgpath= "D:/OctoPackages/";
 var packageId = "app_2";
 var semVer = CreateSemVer(1,0,0);
 var sourcepath= "Application_3.sln";
 var octopusApiKey="API-FNLJSUPLFWUEDSKTFIZBHUWPAM";
+var releaseEnvironment = Argument("releaseTo", "Test");
 
 var octopusServerUrl="http://localhost:83";
 
@@ -87,7 +88,24 @@ Task("OctoCreateRelease")
   
 	});
 
-Task("Default")  
-    .IsDependentOn("OctoCreateRelease"); 
+Task("OctoDeploy")
+.Does(()=>
+{
+    var octoDeploySettings = new OctopusDeployReleaseDeploymentSettings
+    {
+        ShowProgress = true,
+        WaitForDeployment= true
+    };   
+
+    OctoDeployRelease(
+        octopusServerUrl,
+        octopusApiKey, 
+        "app_2", 
+        releaseEnvironment, 
+        semVer.ToString(),
+        octoDeploySettings);
+});
+
+
 
 RunTarget(target);
