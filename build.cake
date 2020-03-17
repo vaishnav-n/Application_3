@@ -61,10 +61,9 @@ Task("OctoPush")
         ReplaceExisting =true
     };
     
-    var physicalFilePath = System.IO.Path.Combine( Directory(octopkgpath), $"{packageId}.{semVer}.nupkg");
     OctoPush(octopusServerUrl, 
         octopusApiKey, 
-        octopkgpath, 
+        GetFiles("D:/OctoPackages/*.*") 
         octoPushSettings);
 	});
 
