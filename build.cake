@@ -16,6 +16,8 @@ var octopkgpath= "D:/OctoPackages/";
 var packageId = "app_2";
 var semVer = CreateSemVer(1,0,0);
 var sourcepath= "Application_3.sln";
+var octopusServer = Argument("octopusServer", "https://your.octopus.server");
+var octopusApiKey = Argument("octopusApiKey", "hey, don't commit your API key");
 var octopusApiKey=EnvironmentVariable("API-FNLJSUPLFWUEDSKTFIZBHUWPAM");
 
 var octopusServerUrl=EnvironmentVariable("http://localhost:83");
@@ -56,15 +58,16 @@ Task("OctoPush")
 	.IsDependentOn("OctoPack")
 	.Does(()=>
 	{	
-    		var physicalFilePath = System.IO.Path.Combine( Directory(octopkgpath), $"{packageId}.{semVer}.nupkg");
+       var octoPushSettings = new OctopusPushSettings()
+    {        
+        ReplaceExisting =true
+    };
     
-    
+    var physicalFilePath = System.IO.Path.Combine( Directory(octopkgpath), $"{packageId}.{semVer}.nupkg");
     OctoPush(octopusServerUrl, 
         octopusApiKey, 
-	physicalFilePath,
-        octopkgpath, new OctopusPushSettings{
-	 ReplaceExisting = true
-        });
+        octopkgpath, 
+        octoPushSettings);
 	});
 
 Task("OctoCreateRelease")
