@@ -1,5 +1,4 @@
 #tool "nuget:?package=OctopusTools&Version=6.7.0"
-#addin "nuget:?package=Cake.ArgumentHelpers"
 #addin "Cake.Npm"&version=0.8.0
 #addin nuget:?package=Cake.SemVer
 #addin nuget:?package=semver&version=2.0.4
@@ -15,13 +14,20 @@ var buildoutputpath= "D:/Output_build/" ;
 var octopkgpath= "D:/OctoPackages/";
 var packageId = "app_2";
 var semVer = CreateSemVer(1,0,0);
-var sourcepath= "D:/Application_2-master/Application_2-master/Application_2.sln";
-var octopusApiKey=EnvironmentVariable("API-OXYIK7IMOBLB12HRG66CLEI24");
+var sourcepath= "D:/Application_3-master/Application_2-master/Application_3.sln";
+var octopusApiKey=EnvironmentVariable("API-FNLJSUPLFWUEDSKTFIZBHUWPAM");
 
-var octopusServerUrl=EnvironmentVariable("http://localhost:81");
+var octopusServerUrl=EnvironmentVariable("http://localhost:83");
 
+Task("Restore")
+    .Does(()=>
+    {
+      NuGetRestore("Application_3.sln")
+      DotNetCoreRestore("Application_3.sln")
+    });
 
 Task("Build")
+    .IsDependentOn("Restore")
     .Does(() => 
     {
         MSBuild(sourcepath, new MSBuildSettings()
