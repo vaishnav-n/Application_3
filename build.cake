@@ -10,7 +10,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.IO;
 
-var target= Argument("Argument","Build");
+var target= Argument("Argument","OctoDeployRelease");
 var buildoutputpath= "D:/Output_build/" ;
 var octopkgpath= "D:/OctoPackages/";
 var packageId = "app_2";
