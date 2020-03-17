@@ -57,13 +57,16 @@ Task("OctoPush")
 	{	
     var physicalFilePath = System.IO.Path.Combine( Directory(octopkgpath), $"{packageId}.{semVer}.nupkg");
     
+     var octoPushSettings = new OctopusPushSettings()
+    {        
+        ReplaceExisting =true
+    };
+    
     OctoPush(octopusServerUrl, 
         octopusApiKey, 
 	physicalFilePath,
         octopkgpath, 
-         new OctopusPushSettings { 
-                ReplaceExisting = true 
-            });
+        OctopusPushSettings);
 	});
 
 Task("OctoCreateRelease")
