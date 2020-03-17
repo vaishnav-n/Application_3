@@ -76,14 +76,15 @@ Task("OctoDeployRelease")
 			Server = octopusServerUrl,
 			ApiKey = octopusApiKey,
 			DeploymentProgress = true,
+			Channel = "Develop",
+			DeployTo = "Test",
 			Packages = new Dictionary<string, string>
 			{
 				{packageId, semVer.ToString()}
 			}
        		 };
 	
-    createReleaseSettings.Channel = "Develop";
-    createReleaseSettings.DeployTo = "Test";
+    OctoDeployRelease("app_2",createReleaseSettings)
   
 	});
 
