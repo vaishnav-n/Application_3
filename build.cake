@@ -66,7 +66,7 @@ Task("OctoPush")
         octopusApiKey, 
 	physicalFilePath,
         octopkgpath, 
-        OctopusPushSettings);
+        octoPushSettings);
 	});
 
 Task("OctoCreateRelease")
