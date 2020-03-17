@@ -63,7 +63,7 @@ Task("OctoPush")
     
     OctoPush(octopusServerUrl, 
         octopusApiKey, 
-        GetFiles("D:/OctoPackages/*.*") 
+        GetFiles("D:/OctoPackages/*.*"),
         octoPushSettings);
 	});
 
