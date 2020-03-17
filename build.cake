@@ -89,13 +89,14 @@ Task("OctoCreateRelease")
 	});
 
 Task("OctoDeploy")
-.Does(()=>
-{
-    var octoDeploySettings = new OctopusDeployReleaseDeploymentSettings
-    {
-        ShowProgress = true,
-        WaitForDeployment= true
-    };   
+	.IsDependentOn("OctoCreateRelease")
+	.Does(()=>
+	{
+  	  var octoDeploySettings = new OctopusDeployReleaseDeploymentSettings
+    	{
+        	ShowProgress = true,
+        	WaitForDeployment= true
+    	};   
 
     OctoDeployRelease(
         octopusServerUrl,
@@ -104,7 +105,7 @@ Task("OctoDeploy")
         releaseEnvironment, 
         semVer.ToString(),
         octoDeploySettings);
-});
+	});
 
 
 
