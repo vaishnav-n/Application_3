@@ -3,9 +3,7 @@
 #addin "Cake.Npm"&version=0.8.0
 #addin nuget:?package=Cake.SemVer
 #addin nuget:?package=semver&version=2.0.4
-#module "nuget:?package=Cake.
-	
-	Systems.Module&version=0.3.2"
+#module "nuget:?package=Cake.Systems.Module&version=0.3.2"
 
 using System;
 using System.Net.Http;
