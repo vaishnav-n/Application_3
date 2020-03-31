@@ -47,8 +47,6 @@ Task("Publish")
 	.Does(()=>
 	{
 		
-		if(File.Exists(FilePath))
-            {
                 string[] data = File.ReadLines(FilePath);
 
 				foreach (var File in data)
@@ -66,7 +64,7 @@ Task("Publish")
 						}
 						
 					}
-			}
+			
   });
 	
 
