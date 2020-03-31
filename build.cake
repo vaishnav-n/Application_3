@@ -1,6 +1,7 @@
 #tool "nuget:?package=OctopusTools&Version=6.7.0"
 #addin "nuget:?package=Cake.ArgumentHelpers"
 #addin "Cake.Npm"&version=0.8.0
+#addin "Cake.FileHelpers"
 #addin nuget:?package=Cake.SemVer
 #addin nuget:?package=semver&version=2.0.4
 #module "nuget:?package=Cake.BuildSystems.Module&version=0.3.2"
