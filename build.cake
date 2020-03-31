@@ -61,7 +61,7 @@ Task("Publish")
 							Runtime = "win-x64"
 							};
 
-							DotNetCorePublish(File, publishSettings);
+							DotNetCorePublish(Filepaths, publishSettings);
 						}
 						
 					}
