@@ -48,7 +48,7 @@ Task("Publish")
 	.Does(()=>
 	{
 		
-                string[] data = File.FileReadLines(FilePath);
+                string[] data = FileReadLines(FilePath);
 
 				foreach (var Filepaths in data)
 					{
