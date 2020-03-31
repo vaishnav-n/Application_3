@@ -1,0 +1,2 @@
+"Calc_SampleApp/Calc_SampleApp.csproj"
+"SampleApp3/SampleApp3.csproj"
