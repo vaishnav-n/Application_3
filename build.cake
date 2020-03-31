@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 using System.IO;
 
 
-string FilePath = "FilePath.txt";
+string FilePath = @"FilePath.txt";
 var target= Argument("Argument","Default");
 var BuildNumber = ArgumentOrEnvironmentVariable("build.number", "", "0.0.1-local.0");
 var buildoutputpath= "D:/Output_build/" ;
@@ -67,7 +67,7 @@ Task("Publish")
 						
 					}
 			}
-	}
+  });
 	
 
 Task("OctoPush")
