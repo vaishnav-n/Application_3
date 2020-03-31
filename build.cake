@@ -10,18 +10,28 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.IO;
 
+
+string FilePath = "FilePath.txt";
 var target= Argument("Argument","Default");
+var BuildNumber = ArgumentOrEnvironmentVariable("build.number", "", "0.0.1-local.0");
 var buildoutputpath= "D:/Output_build/" ;
 var octopkgpath= "D:/OctoPackages/";
-var packageId = "app_2";
-var semVer = CreateSemVer(1,0,0);
-var sourcepath= "D:/Application_2-master/Application_2-master/Application_2.sln";
-var octopusApiKey=EnvironmentVariable("API-OXYIK7IMOBLB12HRG66CLEI24");
+var sourcepath="Application_3.sln";
+var octopusApiKey=ArgumentOrEnvironmentVariable("OctopusDeployApiKey","");
+string BranchName = null;
+string publishDir = "D:/Publish_Package/";
 
-var octopusServerUrl=EnvironmentVariable("http://localhost:81");
+var octopusServerUrl="http://localhost:83";
 
+Task("Restore")
+    .Does(() =>
+	     {
+			NuGetRestore("Application_3.sln");
+	     });
 
 Task("Build")
+	.IsDependentOn("Restore")
+	.IsDependentOn("Version")
     .Does(() => 
     {
         MSBuild(sourcepath, new MSBuildSettings()
@@ -30,23 +40,38 @@ Task("Build")
 
     });
 
-Task("OctoPack")
-	.IsDependentOn("Build")
-	.Does(()=>
-	{    
-		var octoPackSettings = new OctopusPackSettings()
-		{
-			BasePath = buildoutputpath,
-			OutFolder = octopkgpath,
-			Overwrite = true,
-			Version = semVer.ToString()
-		};    
 
-    OctoPack(packageId,octoPackSettings);
-	});
+	
+Task("Publish")
+    .IsDependentOn("Build")
+	.Does(()=>
+	{
+		
+		if(File.Exists(FilePath))
+            {
+                string[] data = File.ReadAllLines(FilePath);
+
+				foreach (var File in data)
+					{
+						if (File.Contains(".csproj"))
+						{
+							var publishSettings = new DotNetCorePublishSettings
+							{
+							Configuration = "Release",
+							OutputDirectory = publishDir,
+							Runtime = "win-x64"
+							};
+
+							DotNetCorePublish(File, publishSettings);
+						}
+						
+					}
+			}
+	}
+	
 
 Task("OctoPush")
-	.IsDependentOn("OctoPack")
+	.IsDependentOn("Publish")
 	.Does(()=>
 	{	
        var octoPushSettings = new OctopusPushSettings()
@@ -54,32 +79,46 @@ Task("OctoPush")
         ReplaceExisting =true
     };
     
-    var physicalFilePath = System.IO.Path.Combine( Directory(octopkgpath), $"{packageId}.{semVer}.nupkg");
     OctoPush(octopusServerUrl, 
         octopusApiKey, 
-        octopkgpath, 
+        GetFiles("D:/Publish_Package/*.*"), 
         octoPushSettings);
 	});
 
-Task("OctoCreateRelease")
-	.IsDependentOn("OctoPush")
-	.Does(()=>
-	{
-		var createReleaseSettings = new CreateReleaseSettings
-		{
-			Server = octopusServerUrl,
-			ApiKey = octopusApiKey,
-			DeploymentProgress = true,
-			Packages = new Dictionary<string, string>
-			{
-				{packageId, semVer.ToString()}
-			}
-        };
+Task("Version")
+  .Does(() =>
+{
+	GitVersionSettings buildServerSettings = new GitVersionSettings {
+		OutputType = GitVersionOutput.BuildServer,
+        UpdateAssemblyInfo = true
+    };
 
-    OctoCreateRelease("app_2", createReleaseSettings);
-	});
+	GitVersion(buildServerSettings);
+
+	SetGitVersionPath(buildServerSettings);
+
+	GitVersionSettings localSettings = new GitVersionSettings();
+
+	var versionResult = GitVersion(localSettings);
+
+	SetGitVersionPath(localSettings);
+
+	BuildNumber = versionResult.SemVer;
+	BranchName = versionResult.BranchName;
+});
+
+public void SetGitVersionPath(GitVersionSettings settings)
+{
+	if (TeamCity.IsRunningOnTeamCity)
+	{
+		Information("Using shared GitVersion");
+
+		settings.ToolPath = "C:\\Users\\vaishnavn\\.nuget\\packages\\gitversion.commandline\\4.0.0\\tools\\gitversion.exe";
+	}
+}
+
 
 Task("Default")  
-    .IsDependentOn("OctoCreateRelease"); 
+    .IsDependentOn("OctoPush"); 
 
 RunTarget(target);
