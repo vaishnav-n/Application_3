@@ -50,9 +50,9 @@ Task("Publish")
 		
                 string[] data = File.ReadLines(FilePath);
 
-				foreach (var File in data)
+				foreach (var Filepaths in data)
 					{
-						if (File.Contains(".csproj"))
+						if (Filepaths.Contains(".csproj"))
 						{
 							var publishSettings = new DotNetCorePublishSettings
 							{
