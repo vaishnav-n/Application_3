@@ -1,6 +1,6 @@
 
 #addin "nuget:?package=cake.template"
-#addin "nuget:?package=Cake.ArgumentHelprs"
+#addin "nuget:?package=Cake.ArgumentHelpers"
 #tool "nuget:?package=GitVersion.CommandLine&Version=4.0.0"
 #module "nuget:?package=Cake.BuildSystems.Module&version=0.3.2"
 
