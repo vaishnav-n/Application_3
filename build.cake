@@ -37,7 +37,7 @@ Task("Version")
 	{
     Information("Staring Gitversion");
 		Version();
-	}
+	});
 
 
 
