@@ -1,5 +1,5 @@
 
-#addin "teamcity:?package=cake.template&version=1.0.0"
+#r "cake.template.1.0.0.nupkg"
 #addin "nuget:?package=Cake.ArgumentHelpers"
 #tool "nuget:?package=GitVersion.CommandLine&Version=4.0.0"
 #module "nuget:?package=Cake.BuildSystems.Module&version=0.3.2"
