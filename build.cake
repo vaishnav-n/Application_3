@@ -1,5 +1,5 @@
 
-#addin "nuget:?package=cake.template"
+#addin "teamcity:?package=cake.template&version=1.0.0"
 #addin "nuget:?package=Cake.ArgumentHelpers"
 #tool "nuget:?package=GitVersion.CommandLine&Version=4.0.0"
 #module "nuget:?package=Cake.BuildSystems.Module&version=0.3.2"
@@ -20,12 +20,14 @@ Task("Build")
    .IsDependentOn("Restore")
    .Does(() =>
    {
+   Information("Building solution");
     TaskBuild(solutionfilepath,buildoutputpath);
    });
    
 Task("Restore")
     .Does(() =>
 	{
+    Information("Restoring Packages");
 		NuGetRestore(solutionfilepath);
 	});
 
@@ -33,6 +35,7 @@ Task("Version")
     .IsDependentOn("Restore")
 	.Does(()=>
 	{
+    Information("Staring Gitversion");
 		Version();
 	}
 
