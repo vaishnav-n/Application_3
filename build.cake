@@ -1,5 +1,5 @@
 
-#tool "nuget:http://localhost:82/httpAuth/app/nuget/feed/CakeTemplate/CakeTemplate/v1/?package=cake.template"
+#addin nuget:file://KODACHADRI/C:/Users/vaishnavn/source/repos/CakePractice/Cake/TemplatePackages/?package=cake.template&version=1.0.1
 #addin "nuget:?package=Cake.ArgumentHelpers"
 #tool "nuget:?package=GitVersion.CommandLine&Version=4.0.0"
 #module "nuget:?package=Cake.BuildSystems.Module&version=0.3.2"
