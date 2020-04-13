@@ -13,7 +13,7 @@ var TeamCityBuildAgentDirectory = ArgumentOrEnvironmentVariable("teamcity.agent.
 string BranchName = null;
 string tenant = null;
 string solutionfilepath="Application_3.sln";
-string buildoutputpath="D:\Build_output\";
+string buildoutputpath="D:/Build_output/";
 
 Task("Build")
    .IsDependentOn("Version")
