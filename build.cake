@@ -1,5 +1,5 @@
 
-#load "nuget:?package=cake.template&version=4.0.0"
+#tool "nuget:?package=cake.template&version=5.0.0"
 #addin "nuget:?package=Cake.ArgumentHelpers"
 #tool "nuget:?package=GitVersion.CommandLine&Version=4.0.0"
 #module "nuget:?package=Cake.BuildSystems.Module&version=0.3.2"
