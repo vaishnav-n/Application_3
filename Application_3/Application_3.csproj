@@ -8,7 +8,7 @@
     <PackageReference Include="Cake" Version="0.37.0" />
     <PackageReference Include="Cake.Core" Version="0.37.0" />
     <PackageReference Include="Cake.FileHelpers" Version="3.2.1" />
-    <PackageReference Include="cake.template" Version="3.0.0" />
+    <PackageReference Include="cake.template" Version="5.0.0" />
   </ItemGroup>
 
 
