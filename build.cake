@@ -4,6 +4,8 @@
 #tool "nuget:?package=GitVersion.CommandLine&Version=4.0.0"
 #module "nuget:?package=Cake.BuildSystems.Module&version=0.3.2"
 
+using cake.template.version;
+using cake.template.TaskBuild;
 var target = Argument("target", "Build");
 var BuildNumber = ArgumentOrEnvironmentVariable("build.number", "", "0.0.1-local.0");
 var MsBuildLogger = ArgumentOrEnvironmentVariable("MsBuildLogger", "", "");
