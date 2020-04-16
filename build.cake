@@ -1,5 +1,4 @@
-
-#addin "nuget:file://KODACHADRI/Users/vaishnavn/source/repos/CakePractice/Cake/TemplatePackages/?package=Sample&version=7.0.0"
+#r "C:\Users\vaishnavn\source\repos\CakePractice\Cake\Sample\bin\Debug\Sample.dll"
 #addin "nuget:?package=Cake.ArgumentHelpers"
 #tool "nuget:?package=GitVersion.CommandLine&Version=4.0.0"
 #module "nuget:?package=Cake.BuildSystems.Module&version=0.3.2"
