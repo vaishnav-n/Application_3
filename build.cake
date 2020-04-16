@@ -36,7 +36,7 @@ Task("Version")
 	.Does(()=>
 	{
     Information("Staring Gitversion");
-		Version(context);
+		Version();
 	});
 
 
