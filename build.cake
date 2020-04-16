@@ -35,7 +35,10 @@ Task("Version")
 	.Does(()=>
 	{
     Information("Staring Gitversion");
-		Version();
+
+    var vermsg= Version();
+
+    Information(vermsg);
 	});
 
 
