@@ -1,4 +1,4 @@
-#addin "nuget:http://localhost:82/httpAuth/app/nuget/feed/CakeTemplate/CakeTemplate/v3/index.json/?package=Sample.nupkg&version=12.0.0"
+#r "C:\Users\vaishnavn\source\repos\CakePractice\Cake\Sample\bin\Debug\Sample.dll"
 #addin "nuget:?package=Cake.ArgumentHelpers"
 #tool "nuget:?package=GitVersion.CommandLine&Version=4.0.0"
 #module "nuget:?package=Cake.BuildSystems.Module&version=0.3.2"
@@ -41,5 +41,52 @@ Task("Version")
     Information(vermsg);
 	});
 
+Task("Test")
+    .IsDependentOn("Build")
+    .Does(() =>
+    {
+     var testAdapterPath = GetFiles("./**/vstest15/TeamCity.VSTest.TestAdapter.dll").First();
+
+	Information("Test Adapter Path " + testAdapterPath);
+
+	if (TeamCity.IsRunningOnTeamCity) 
+	{
+		settings.Logger = "teamcity";
+		settings.TestAdapterPath = testAdapterPath.GetDirectory();
+	}
+
+    DotNetCoreTest(
+        "./HHAExchange.VisitAuthorization.sln",
+        settings);
+  
+    }
+
+Task("Publish")
+    .IsDepedentOn("Test")
+    .Does(()=>
+    {
+      String JsonPath="./Lstpaths.json";
+
+      PublishMultipleTasks(JsonPath)
+    }
+
+Task("OctoPush")
+  .IsDependentOn("Pack")
+  .IsDependentOn("Publish")
+  .IsDependentOn("Version")
+  .Does(() => 
+{
+
+	if (BuildNumber.Contains("-develop") || BuildNumber.Contains("-release") || IsFeatureBranchWithTenant())
+	{
+		Information("Push packages to Octopus");
+
+		OctoPush(OctopusDeployUrl, OctopusDeployApiKey, GetFiles("./publishpackage/*.*"),
+		  new OctopusPushSettings 
+		  {
+			ReplaceExisting = true
+		  });
+	}
+});
 
 RunTarget(target);
