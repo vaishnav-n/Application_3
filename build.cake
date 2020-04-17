@@ -1,4 +1,4 @@
-#r "C:\Users\vaishnavn\source\repos\CakePractice\Cake\Sample\bin\Debug\Sample.dll"
+#addin "nuget:http://localhost:82/httpAuth/app/nuget/feed/CakeTemplate/CakeTemplate/v3/index.json/?package=Sample&version=12.0.0"
 #addin "nuget:?package=Cake.ArgumentHelpers"
 #tool "nuget:?package=GitVersion.CommandLine&Version=4.0.0"
 #module "nuget:?package=Cake.BuildSystems.Module&version=0.3.2"
@@ -40,7 +40,6 @@ Task("Version")
 
     Information(vermsg);
 	});
-
 
 
 RunTarget(target);
