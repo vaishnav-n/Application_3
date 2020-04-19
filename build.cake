@@ -1,7 +1,7 @@
-#addin "nuget:?package=Sample&version=14.0.0"
-#addin "nuget:?package=Cake.ArgumentHelpers"
-#tool "nuget:?package=GitVersion.CommandLine&Version=4.0.0"
-#module "nuget:?package=Cake.BuildSystems.Module&version=0.3.2"
+#addin nuget:?package=Sample
+#addin nuget:?package=Cake.ArgumentHelpers
+#tool nuget:?package=GitVersion.CommandLine&Version=4.0.0
+#module nuget:?package=Cake.BuildSystems.Module&version=0.3.2
 
 var target = Argument("target", "Build");
 var BuildNumber = ArgumentOrEnvironmentVariable("build.number", "", "0.0.1-local.0");
