@@ -1,4 +1,4 @@
-#addin "nuget:http://localhost:82/httpAuth/app/nuget/feed/CakeTemplate/CakeTemplate/v3/index.json?package=Sample&version=13.0.0"
+#addin "nuget:http://localhost:82/httpAuth/app/nuget/feed/CakeTemplate/CakeTemplate/v3/index.json?package=Sample&version=14.0.0"
 #addin "nuget:?package=Cake.ArgumentHelpers"
 #tool "nuget:?package=GitVersion.CommandLine&Version=4.0.0"
 #module "nuget:?package=Cake.BuildSystems.Module&version=0.3.2"
